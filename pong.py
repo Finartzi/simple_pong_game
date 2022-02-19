@@ -1,12 +1,14 @@
 # Simple Pong in Python 3 for beginners
 # By @TokyoEdTech
-# Part 3 : Moving the paddles
+# Part 4 : Moving the ball
 
 import turtle
 
 wn = turtle.Screen()
 wn.title("Pong by  @TokyoEdTech")
 wn.bgcolor("black")
+wn.setup(width=800, height=600)
+wn.tracer(2000)
 
 # Paddle A
 paddle_a = turtle.Turtle()
@@ -33,6 +35,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0,0)
+ball.dx = 2
+ball.dy = -2
 
 # Function
 def paddle_a_up():
@@ -65,3 +69,23 @@ wn.onkeypress(paddle_b_down, 'Down')
 while True:
     wn.update()
 
+    # Move the Ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    # Border checking
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1
+
+    if ball.xcor() > 390:
+        ball.goto(0,0)
+        ball.dx *= -1
+    
+    if ball.xcor() < -390:
+        ball.goto(0,0)
+        ball.dx *= -1
