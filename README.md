@@ -34,6 +34,7 @@
 ## Needed packages
 
     - # pip3 install turtle
+    - # sudo apt install python3-tk
 
 ## Solving aids listed here
 
