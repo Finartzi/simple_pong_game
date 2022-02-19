@@ -1,6 +1,6 @@
 # Simple Pong in Python 3 for beginners
 # By @TokyoEdTech
-# Part 4 : Moving the ball
+# Part 5 : Colliding with the paddles
 
 import turtle
 
@@ -8,7 +8,7 @@ wn = turtle.Screen()
 wn.title("Pong by  @TokyoEdTech")
 wn.bgcolor("black")
 wn.setup(width=800, height=600)
-wn.tracer(2000)
+wn.tracer(0)
 
 # Paddle A
 paddle_a = turtle.Turtle()
@@ -88,4 +88,13 @@ while True:
     
     if ball.xcor() < -390:
         ball.goto(0,0)
+        ball.dx *= -1
+
+    # Paddle and ball collisions
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(340)
+        ball.dx *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(-340)
         ball.dx *= -1
