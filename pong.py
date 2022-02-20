@@ -1,6 +1,6 @@
 # Simple Pong in Python 3 for beginners
 # By @TokyoEdTech
-# Part 7 : Sound
+# Finishing with some evolution by myself
 
 import turtle
 import os
@@ -75,6 +75,11 @@ def paddle_b_down():
     y -= 20
     paddle_b.sety(y)
 
+def playSound():
+    return os.system("aplay res/bounce.wav") # in Linux
+    # os.system("afplay res/bounce.wav&") # in MAC
+    # winsound.PlaySound("res/bounce.wav", winsound.SND_ASYNC) # in Windows
+
 # Keyboard binding
 wn.listen()
 wn.onkeypress(paddle_a_up, 'w')
@@ -93,14 +98,12 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
-        os.system("aplay res/bounce.wav") # in Linux
-        # os.system("afplay res/bounce.wav&") # in MAC
-        # winsound.PlaySound("res/bounce.wav", winsound.SND_ASYNC) # in Windows
+        playSound()
 
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
-        os.system("aplay res/bounce.wav")
+        playSound()
 
     if ball.xcor() > 390:
         ball.goto(0,0)
@@ -120,9 +123,9 @@ while True:
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
         ball.dx *= -1
-        os.system("aplay res/bounce.wav")
+        playSound()
 
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-340)
         ball.dx *= -1
-        os.system("aplay res/bounce.wav")
+        playSound()
