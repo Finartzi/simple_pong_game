@@ -1,8 +1,10 @@
 # Simple Pong in Python 3 for beginners
 # By @TokyoEdTech
-# Part 6 : Scoring
+# Part 7 : Sound
 
 import turtle
+import os
+# import winsound # for MS Windows
 
 wn = turtle.Screen()
 wn.title("Pong by  @TokyoEdTech")
@@ -91,10 +93,14 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
+        os.system("aplay res/bounce.wav") # in Linux
+        # os.system("afplay res/bounce.wav&") # in MAC
+        # winsound.PlaySound("res/bounce.wav", winsound.SND_ASYNC) # in Windows
 
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
+        os.system("aplay res/bounce.wav")
 
     if ball.xcor() > 390:
         ball.goto(0,0)
@@ -114,7 +120,9 @@ while True:
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
         ball.dx *= -1
+        os.system("aplay res/bounce.wav")
 
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-340)
         ball.dx *= -1
+        os.system("aplay res/bounce.wav")
