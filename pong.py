@@ -6,10 +6,14 @@ import turtle
 import os
 # import winsound # for MS Windows
 
+canvas_height = 800
+canvas_width = 600
+paddle_position_difference = 50
+
 wn = turtle.Screen()
 wn.title("Pong by  @TokyoEdTech")
 wn.bgcolor("black")
-wn.setup(width=800, height=600)
+wn.setup(canvas_height, canvas_width )
 wn.tracer(0)
 
 # Score
@@ -23,7 +27,7 @@ paddle_a.shape("square")
 paddle_a.color("white")
 paddle_a.shapesize(stretch_wid=5, stretch_len=1)
 paddle_a.penup()
-paddle_a.goto(-350,0)
+paddle_a.goto(-canvas_height/2 + paddle_position_difference, 0)
 
 # Paddle B
 paddle_b = turtle.Turtle()
@@ -32,7 +36,7 @@ paddle_b.shape("square")
 paddle_b.color("white")
 paddle_b.shapesize(stretch_wid=5, stretch_len=1)
 paddle_b.penup()
-paddle_b.goto(350,0)
+paddle_b.goto(canvas_height/2 - paddle_position_difference, 0)
 
 # Ball
 ball = turtle.Turtle()
@@ -50,7 +54,7 @@ pen.speed(0)
 pen.color("white")
 pen.penup()
 pen.hideturtle()
-pen.goto(0, 260)
+pen.goto(0, canvas_width/2 - 40)
 pen.write("Player A: 0 Player B: 0", align="center", font=("Courier", 24, "normal"))
 
 
@@ -95,24 +99,24 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
     # Border checking
-    if ball.ycor() > 290:
-        ball.sety(290)
+    if ball.ycor() > canvas_width/2 - 10:
+        ball.sety(canvas_width/2 - 10)
         ball.dy *= -1
         playSound()
 
-    if ball.ycor() < -290:
-        ball.sety(-290)
+    if ball.ycor() < -canvas_width/2 + 10:
+        ball.sety(-canvas_width/2 + 10)
         ball.dy *= -1
         playSound()
 
-    if ball.xcor() > 390:
+    if ball.xcor() > canvas_height/2 - 10:
         ball.goto(0,0)
         ball.dx *= -1
         score_a += 1
         pen.clear()
         pen.write("Player A: {} Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
     
-    if ball.xcor() < -390:
+    if ball.xcor() < -canvas_height/2 + 10:
         ball.goto(0,0)
         ball.dx *= -1
         score_b += 1
